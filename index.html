@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WordType</title>
+<link rel="icon" type="image/svg+xml" href="icon/3ee1acb4eb19ed7ed2dc6217f4950106c1fbc076-512x527.svg">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/titlebar.css">
+<link rel="stylesheet" href="css/menubar.css">
+<link rel="stylesheet" href="css/ribbon.css">
+<link rel="stylesheet" href="css/workspace.css">
+<link rel="stylesheet" href="css/statusbar.css">
+</head>
+<body>
+
+<div id="app">
+  <div class="titlebar">
+    <button class="tb-icon-btn" title="App launcher" data-icon="waffle"></button>
+    <div class="tb-doc-group">
+      <img class="tb-word-icon" src="icon/3ee1acb4eb19ed7ed2dc6217f4950106c1fbc076-512x527.svg" alt="Word logo">
+      <div class="tb-doc-info">
+        <span class="tb-doc-name">Document</span>
+        <span class="tb-doc-sync" data-icon="cloudsync" title="Synced to OneDrive"></span>
+      </div>
+    </div>
+    <div class="tb-search-wrap">
+      <div class="tb-search" id="searchFocus">
+        <span class="icon" data-icon="search"></span>
+        <span>Search for tools, help, and more (Alt + Q)</span>
+      </div>
+    </div>
+    <div class="tb-right">
+      <button class="tb-icon-btn tb-search-compact" data-icon="search" title="Search"></button>
+      <div class="tb-buy" data-icon="diamond">
+        <span>Buy Microsoft 365</span>
+      </div>
+      <div class="tb-settings" id="settingsBtn" title="Settings" data-icon="settingsgear">
+        <div class="panel settings-panel" id="settingsPanel">
+          <div class="panel-title">Settings</div>
+          <div class="qr-label">Quick restart key</div>
+          <div class="qr-options">
+            <button class="qr-opt" type="button" data-val="off">Off</button>
+            <button class="qr-opt" type="button" data-val="esc">Esc</button>
+            <button class="qr-opt" type="button" data-val="tab">Tab</button>
+            <button class="qr-opt" type="button" data-val="enter">Enter</button>
+          </div>
+        </div>
+      </div>
+      <div class="tb-avatar" id="profileBtn" title="Account">
+        <span>HJ</span>
+        <div class="panel" id="profilePanel">
+          <div class="panel-title">Your stats</div>
+          <div class="profile-stat-row"><span class="plabel">Average WPM</span><span class="pval" id="pStatWpm">0</span></div>
+          <div class="profile-stat-row"><span class="plabel">Average raw WPM</span><span class="pval" id="pStatRaw">0</span></div>
+          <div class="profile-stat-row"><span class="plabel">Lowest WPM</span><span class="pval" id="pStatMin">0</span></div>
+          <div class="profile-stat-row"><span class="plabel">Highest WPM</span><span class="pval" id="pStatMax">0</span></div>
+          <div class="profile-stat-row"><span class="plabel">Average accuracy</span><span class="pval" id="pStatAcc">0%</span></div>
+          <div class="profile-stat-row"><span class="plabel">Average consistency</span><span class="pval" id="pStatCon">0%</span></div>
+          <div class="profile-stat-row"><span class="plabel">Games played</span><span class="pval" id="pStatGames">0</span></div>
+          <button class="profile-wipe-btn" id="wipeHistoryBtn" type="button">Wipe history</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menubar">
+    <div class="mtab"><span>File</span></div>
+    <div class="mtab active"><span>Home</span></div>
+    <div class="mtab tab-insert"><span>Insert</span></div>
+    <div class="mtab tab-layout"><span>Layout</span></div>
+    <div class="mtab tab-references"><span>References</span></div>
+    <div class="mtab tab-review"><span>Review</span></div>
+    <div class="mtab tab-view"><span>View</span></div>
+    <div class="mtab tab-help"><span>Help</span></div>
+    <button class="mtab-more" type="button" title="More tabs"><span class="chev" data-icon="chevdown"></span></button>
+    <div class="menubar-actions">
+      <div class="mpill" data-icon="commentmultiple" title="Comments"><span>Comments</span></div>
+      <div class="mpill" data-icon="catchup" title="Catch up"><span>Catch up</span></div>
+      <div class="mpill" data-icon="edit" title="Editing mode"><span>Editing</span><span class="chev" data-icon="chevdown"></span></div>
+      <div class="mpill share" data-icon="share" title="Share"><span>Share</span><span class="chev" data-icon="chevdown"></span></div>
+      <button class="mpill mpill-more" type="button" title="More">⋯</button>
+    </div>
+  </div>
+
+  <div class="ribbon-wrap">
+    <div class="ribbon">
+
+      <div class="rsection">
+        <div class="rsection-body">
+          <div class="rcol fill">
+            <button class="sbtn" data-icon="undo" title="Undo"></button>
+            <button class="sbtn" data-icon="redo" title="Redo"></button>
+          </div>
+        </div>
+        <div class="rsection-label">Undo</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body">
+          <button class="rbtn-big" data-icon="paste" title="Paste">
+            <span class="meta"><span>Paste</span><span class="chev" data-icon="chevdown"></span></span>
+          </button>
+          <div class="rcol stack">
+            <button class="sbtn" data-icon="cut" title="Cut"></button>
+            <button class="sbtn" data-icon="copy" title="Copy"></button>
+            <button class="sbtn" data-icon="painter" title="Format Painter"></button>
+          </div>
+        </div>
+        <div class="rsection-label">Clipboard</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body center">
+          <div class="font-section">
+            <div class="rrow">
+              <div class="rdd font"><span>Aptos (Body)</span><span class="chev" data-icon="chevdown"></span></div>
+              <div class="rdd size"><span>12</span><span class="chev" data-icon="chevdown"></span></div>
+              <span class="vsep"></span>
+              <button class="tbtn" style="font-size:13px;font-weight:700;" title="Grow Font">A<sup style="font-size:8px;">↑</sup></button>
+              <button class="tbtn" style="font-size:13px;font-weight:700;" title="Shrink Font">A<sup style="font-size:8px;">↓</sup></button>
+              <button class="sbtn" data-icon="changecase" title="Change Case"></button>
+            </div>
+            <div class="rrow">
+              <button class="tbtn bold" title="Bold">B</button>
+              <button class="tbtn italic" title="Italic">I</button>
+              <button class="tbtn underline" title="Underline">U</button>
+              <button class="tbtn strike" style="font-size:11px;" title="Strikethrough">ab</button>
+              <button class="tbtn" style="font-size:11px;" title="Subscript">X<sub>2</sub></button>
+              <button class="tbtn" style="font-size:11px;" title="Superscript">X<sup>2</sup></button>
+              <button class="tbtn" style="font-size:11px;" title="Text Effects">Ab</button>
+              <span class="vsep"></span>
+              <button class="swatch-btn" data-icon="highlight" title="Text Highlight Color"><span class="bar highlight"></span></button>
+              <button class="swatch-btn" data-icon="textcolor" title="Font Color"><span class="bar textcolor"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="rsection-label">Font</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body center">
+          <div class="font-section">
+            <div class="rrow">
+              <button class="sbtn dropdown" data-icon="bullets" title="Bullets"><span class="chev" data-icon="chevdown"></span></button>
+              <button class="sbtn dropdown" data-icon="numbering" title="Numbering"><span class="chev" data-icon="chevdown"></span></button>
+              <button class="sbtn dropdown" data-icon="indentdec" title="Decrease Indent"><span class="chev" data-icon="chevdown"></span></button>
+              <button class="sbtn" data-icon="indentinc" title="Increase Indent"></button>
+              <span class="vsep"></span>
+              <button class="sbtn" data-icon="sort" title="Sort"></button>
+              <button class="sbtn active" data-icon="paragraph" title="Show/Hide ¶"></button>
+            </div>
+            <div class="rrow">
+              <button class="sbtn dropdown" data-icon="alignleft" title="Align Left"><span class="chev" data-icon="chevdown"></span></button>
+              <button class="sbtn" data-icon="aligncenter" title="Center"></button>
+              <button class="sbtn" data-icon="alignright" title="Align Right"></button>
+              <button class="sbtn dropdown" data-icon="justify" title="Distributed"><span class="chev" data-icon="chevdown"></span></button>
+              <span class="vsep"></span>
+              <button class="sbtn dropdown" data-icon="linespacing" title="Line Spacing"><span class="chev" data-icon="chevdown"></span></button>
+              <button class="sbtn dropdown" data-icon="shading" title="Shading"><span class="chev" data-icon="chevdown"></span></button>
+              <button class="sbtn dropdown" data-icon="borders" title="Borders"><span class="chev" data-icon="chevdown"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="rsection-label">Paragraph</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body center">
+          <div class="styles-gallery">
+            <button class="style-box selected" id="modeWords"><span class="name">Normal</span><span class="subtitle">Aptos, 12</span></button>
+            <button class="style-box" id="modeParagraph"><span class="name">Paragraph</span><span class="subtitle">Aptos, 12</span></button>
+            <button class="style-box heading"><span class="name">Heading 1</span><span class="subtitle">Aptos Display, 20</span></button>
+            <button class="styles-more" data-icon="chevdownbig" title="More styles"></button>
+          </div>
+        </div>
+        <div class="rsection-label">Styles</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body">
+          <div class="editing-list">
+            <button class="ebtn" data-icon="findicon" title="Find"><span class="label">Find</span></button>
+            <button class="ebtn" data-icon="replace" title="Replace"><span class="label">Replace</span></button>
+            <button class="ebtn" data-icon="select" title="Select"><span class="label">Select</span><span class="chev" data-icon="chevdown"></span></button>
+          </div>
+        </div>
+        <div class="rsection-label">Editing</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body">
+          <button class="rbtn-big" data-icon="dictate" title="Dictate">
+            <span class="meta"><span>Dictate</span><span class="chev" data-icon="chevdown"></span></span>
+          </button>
+        </div>
+        <div class="rsection-label">Voice</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body">
+          <button class="rbtn-big" data-icon="editor" title="Editor">
+            <span class="meta"><span>Editor</span></span>
+          </button>
+        </div>
+        <div class="rsection-label">Proofing</div>
+      </div>
+
+      <div class="rsection">
+        <div class="rsection-body">
+          <button class="rbtn-big" data-icon="addins" title="Add-ins">
+            <span class="meta"><span>Add-ins</span><span class="chev" data-icon="chevdown"></span></span>
+          </button>
+        </div>
+        <div class="rsection-label">Add-ins</div>
+      </div>
+
+    </div>
+    <button class="ribbon-collapse" data-icon="chevdown" title="Collapse the Ribbon"></button>
+  </div>
+
+  <div class="workspace" id="workspace">
+    <div class="page" id="page">
+      <div class="word-counter" id="wordCounter">0/0</div>
+      <button class="new-words-btn" id="newWordsBtn" title="New words" data-icon="refresh"></button>
+      <div class="words" id="words"></div>
+      <div class="results" id="results">
+        <div class="result-row"><span class="lbl">Words per minute</span><span class="val" id="rWpm">0</span></div>
+        <div class="result-row"><span class="lbl">Raw WPM</span><span class="val" id="rRaw">0</span></div>
+        <div class="result-row"><span class="lbl">Accuracy</span><span class="val" id="rAcc">0%</span></div>
+        <div class="result-row"><span class="lbl">Consistency</span><span class="val" id="rCon">0%</span></div>
+        <button class="retry-btn" id="retryBtn" title="Retry" type="button" data-icon="refresh">
+          <span>Retry</span>
+        </button>
+      </div>
+      <input id="capture" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </div>
+  </div>
+
+  <div class="statusbar">
+    <div class="sb-left">
+      <span>Page 1 of 1</span>
+      <span id="sbWords">0 words</span>
+      <span>English (US)</span>
+      <span data-icon="check" style="display:flex;align-items:center;gap:4px;">Editor Suggestions: Showing</span>
+    </div>
+    <div class="sb-right">
+      <span class="sb-icon" data-icon="focus" title="Focus"></span>
+      <span class="sb-icon" data-icon="doc" title="Read Mode"></span>
+      <span class="sb-icon" data-icon="doc" title="Print Layout"></span>
+      <span class="sb-icon" data-icon="doc" title="Web Layout"></span>
+      <div class="sb-zoom">
+        <span class="sb-icon" data-icon="minus"></span>
+        <input type="range" min="50" max="200" value="100" />
+        <span class="sb-icon" data-icon="plus"></span>
+        <span>100%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-overlay" id="wipeConfirmOverlay">
+  <div class="confirm-dialog">
+    <div class="confirm-title">Wipe history?</div>
+    <p class="confirm-text">This will permanently delete all of your saved typing statistics. This can't be undone.</p>
+    <div class="confirm-actions">
+      <button class="confirm-btn" id="wipeCancelBtn" type="button">Cancel</button>
+      <button class="confirm-btn danger" id="wipeConfirmBtn" type="button">Wipe history</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/word-bank.js"></script>
+<script src="js/paragraph-bank.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/typing-test.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

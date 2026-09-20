@@ -1,0 +1,101 @@
+.titlebar{
+  box-sizing:content-box;
+  height:40px;
+  padding:8px 6px 4px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:var(--bg);
+  -webkit-user-select:none;user-select:none;
+}
+.tb-icon-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:4px;flex:0 0 auto;
+  color:var(--text);background:transparent;border:none;cursor:pointer;
+}
+.tb-icon-btn:hover{background:rgba(255,255,255,.1);}
+.tb-icon-btn svg{width:24px;height:24px;}
+
+.tb-doc-group{display:flex;align-items:center;padding:0 8px;margin-left:12px;flex:0 0 auto;}
+.tb-word-icon{display:block;width:18px;height:18px;flex:0 0 auto;object-fit:contain;}
+.tb-doc-info{display:flex;align-items:center;gap:12px;margin-left:24px;}
+.tb-doc-name{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;}
+.tb-doc-sync{display:flex;width:20px;height:20px;margin-top:2px;flex:0 0 auto;color:var(--cloudsync-color);}
+.tb-doc-sync svg{width:100%;height:100%;}
+
+.tb-search-wrap{flex:1 1 auto;display:flex;justify-content:center;min-width:0;margin:0 16px;}
+.tb-search{
+  width:100%;max-width:440px;height:32px;border-radius:6px;
+  background:var(--surface-2);
+  box-shadow:0 1px 4px rgba(0,0,0,.55);
+  display:flex;align-items:center;gap:10px;padding:0 14px;
+  cursor:text;
+}
+.tb-search:hover{background:var(--surface-hover);}
+.tb-search .icon{display:flex;width:16px;height:16px;flex:0 0 auto;color:var(--text-muted);}
+.tb-search .icon svg{width:100%;height:100%;}
+.tb-search span{font-size:14px;color:var(--text-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.tb-right{display:flex;align-items:center;gap:12px;flex:0 0 auto;margin-left:auto;}
+.tb-search-compact{display:none;width:30px;height:30px;}
+.tb-search-compact svg{width:18px;height:18px;}
+.tb-buy{
+  display:flex;align-items:center;gap:6px;height:28px;padding:0 8px;border-radius:4px;
+  color:var(--text);font-size:14px;cursor:pointer;white-space:nowrap;
+}
+.tb-buy:hover{background:rgba(255,255,255,.1);}
+.tb-buy svg{width:16px;height:16px;color:var(--text-white);}
+
+.tb-settings{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:4px;color:var(--text);cursor:pointer;flex:0 0 auto;
+}
+.tb-settings:hover{background:rgba(255,255,255,.1);}
+.tb-settings svg{width:18px;height:18px;}
+
+.tb-avatar{
+  position:relative;
+  width:30px;height:30px;border-radius:50%;background:var(--bg);color:var(--text-white);
+  box-shadow:0 0 0 1px rgba(255,255,255,.7);
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto;cursor:pointer;
+}
+.tb-avatar:hover:not(:has(.panel.show)){opacity:.8;}
+.tb-avatar span{font-size:13px;font-weight:600;}
+
+/* ---- profile popover ---- */
+.profile-stat-row{display:flex;justify-content:space-between;align-items:baseline;}
+.profile-stat-row .plabel{color:var(--text-dim);}
+.profile-stat-row .pval{font-variant-numeric:tabular-nums;font-weight:600;}
+.profile-wipe-btn{
+  margin-top:6px;padding:7px 10px;border-radius:4px;border:1px solid rgba(255,92,77,.4);
+  background:transparent;color:var(--error);font-size:12px;cursor:pointer;text-align:center;
+  font-family:inherit;
+}
+.profile-wipe-btn:hover{background:rgba(255,92,77,.12);border-color:var(--error);}
+
+/* ---- settings popover ---- */
+.settings-panel{right:0;width:220px;}
+.qr-label{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+.qr-options{display:flex;gap:4px;}
+.qr-opt{
+  flex:1;padding:6px 0;border-radius:4px;border:1px solid var(--border-subtle);
+  background:transparent;color:var(--text-dim);font-size:11.5px;cursor:pointer;
+  text-align:center;font-family:inherit;
+}
+.qr-opt:hover{background:rgba(255,255,255,.1);color:var(--text);}
+.qr-opt.active{background:var(--accent);color:var(--text-white);border-color:var(--accent);}
+
+/* .tb-doc-name ("Document") is intentionally never hidden at any width. */
+
+@media (max-width:900px){
+  .tb-search-wrap{display:none;}
+  .tb-search-compact{display:flex;}
+}
+
+@media (max-width:680px){
+  .tb-buy span{display:none;}
+}
+
+@media (max-width:400px){
+  .tb-search-compact{display:none;}
+}

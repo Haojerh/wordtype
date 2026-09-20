@@ -1,0 +1,145 @@
+.ribbon-wrap{position:relative;flex:0 0 auto;background:var(--bg);padding:4px 8px 0px;}
+.ribbon{
+  display:flex;align-items:stretch;height:101px;
+  background:var(--surface);border-radius:9px;
+  box-shadow:0 2px 6px rgba(0,0,0,.6);
+  padding:4px 0;overflow-x:auto;overflow-y:hidden;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.ribbon::-webkit-scrollbar{display:none;}
+.ribbon-collapse{
+  position:absolute;right:12px;bottom:0;
+  display:flex;align-items:center;justify-content:center;
+  width:22px;height:22px;padding:0;border:none;border-radius:3px;
+  background:transparent;color:var(--text);cursor:pointer;
+}
+.ribbon-collapse:hover{background:rgba(255,255,255,.1);color:var(--text-white);}
+.ribbon-collapse svg{width:15px;height:15px;}
+
+.rsection{
+  display:flex;flex-direction:column;flex:0 0 auto;
+  padding:0 6px;border-right:1px solid var(--border-subtle);
+}
+.rsection:last-child{border-right:none;}
+.rsection-body{flex:1 1 0;min-height:0;display:flex;align-items:flex-start;gap:2px;}
+.rsection-body.center{align-items:center;}
+.rsection-label{
+  flex:0 0 auto;padding:3px 0;text-align:center;
+  font-size:10px;color:var(--text-dim);white-space:nowrap;line-height:1;
+}
+
+.rcol{display:flex;flex-direction:column;gap:1px;}
+.rcol.fill{height:100%;justify-content:space-around;gap:2px;padding:4px 0;}
+.rcol.stack{height:100%;justify-content:flex-start;}
+.rrow{display:flex;gap:2px;align-items:center;}
+
+.chev{display:inline-flex;flex:0 0 auto;width:8px;height:8px;color:var(--text-muted);}
+.chev svg{width:100%;height:100%;}
+
+.vsep{align-self:stretch;width:1px;background:rgba(255,255,255,.15);margin:0 4px;flex:0 0 auto;}
+
+/* small square icon button (SBtn) */
+.sbtn{
+  display:flex;align-items:center;justify-content:center;
+  width:24px;height:24px;padding:0;border-radius:4px;border:none;background:transparent;
+  color:var(--text);cursor:pointer;
+}
+.sbtn:hover{background:rgba(255,255,255,.1);}
+.sbtn.active{background:rgba(255,255,255,.2);}
+.sbtn > svg{width:15px;height:15px;}
+.sbtn.dropdown{width:auto;padding:0 2px;gap:1px;}
+.sbtn.dropdown .chev{width:8px;height:8px;}
+
+/* text glyph button (TBtn) */
+.tbtn{
+  display:flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:4px;border:none;background:transparent;
+  color:var(--text);font-size:12px;line-height:1;cursor:pointer;
+}
+.tbtn:hover{background:rgba(255,255,255,.1);}
+.tbtn.active{background:rgba(255,255,255,.2);}
+.tbtn.bold{font-weight:700;font-size:13px;}
+.tbtn.italic{font-style:italic;font-size:13px;}
+.tbtn.underline{text-decoration:underline;}
+.tbtn.strike{text-decoration:line-through;}
+
+/* large vertical ribbon button (RBtn) — Paste, Dictate, Editor, Add-ins */
+.rbtn-big{
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  min-width:44px;height:100%;padding:4px 8px 2px;border-radius:4px;border:none;background:transparent;
+  color:var(--text);cursor:pointer;
+}
+.rbtn-big:hover{background:rgba(255,255,255,.1);}
+.rbtn-big > svg{width:24px;height:24px;}
+.rbtn-big .meta .chev{width:10px;height:10px;}
+.rbtn-big .meta{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:12px;}
+.rbtn-big .meta span{font-size:12px;color:var(--text);white-space:nowrap;}
+
+/* icon-only tints — scoped to the injected <svg> so sibling labels/chevrons stay neutral */
+.rbtn-big[data-icon="paste"] > svg{color:var(--paste-color);}
+.rbtn-big[data-icon="dictate"] > svg,
+.rbtn-big[data-icon="editor"] > svg{color:var(--accent);}
+.rbtn-big[data-icon="addins"] > svg{color:var(--addins-color);}
+.sbtn[data-icon="changecase"] > svg{color:var(--changecase-color);}
+
+/* font size / family dropdowns */
+.rdd{
+  display:flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:4px;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);font-size:12px;cursor:pointer;white-space:nowrap;
+}
+.rdd:hover{background:rgba(255,255,255,.08);}
+.rdd.font{min-width:118px;justify-content:space-between;}
+.rdd.size{width:40px;padding:0 6px;justify-content:space-between;}
+
+.font-section{display:flex;flex-direction:column;gap:4px;}
+
+/* highlight / font color swatch buttons */
+.swatch-btn{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  width:24px;height:24px;border-radius:4px;border:none;background:transparent;cursor:pointer;color:var(--text);
+}
+.swatch-btn:hover{background:rgba(255,255,255,.1);}
+.swatch-btn > svg{width:15px;height:15px;}
+.swatch-btn .bar{height:2px;width:14px;border-radius:2px;}
+.swatch-btn .bar.highlight{background:var(--highlight-swatch);}
+.swatch-btn .bar.textcolor{background:var(--textcolor-swatch);}
+
+/* styles gallery */
+.styles-gallery{
+  display:flex;align-items:center;gap:6px;padding:4px;border-radius:4px;
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 1px 4px rgba(0,0,0,.4);
+}
+.style-box{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  min-width:110px;height:52px;padding:0 12px;border-radius:4px;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--text);cursor:pointer;flex:0 0 auto;
+}
+.style-box:hover{background:#363636;}
+.style-box.selected{border-color:var(--border-strong);}
+.style-box .name{font-size:14px;color:var(--text);}
+.style-box .subtitle{font-size:9px;color:var(--text-faint);}
+.style-box.heading .name{font-size:17px;font-weight:700;color:var(--heading-color);}
+.styles-more{
+  display:flex;align-items:center;justify-content:center;width:20px;height:52px;
+  border:none;background:transparent;border-radius:4px;color:var(--text-muted);cursor:pointer;
+}
+.styles-more:hover{background:rgba(255,255,255,.1);}
+.styles-more svg{width:14px;height:14px;}
+
+/* editing section (Find / Replace / Select) */
+.editing-list{display:flex;flex-direction:column;justify-content:center;height:100%;width:100%;min-width:88px;gap:4px;}
+.ebtn{
+  display:flex;align-items:center;gap:8px;width:100%;padding:4px 10px;border-radius:4px;
+  color:var(--text);cursor:pointer;font-size:12px;background:transparent;border:none;text-align:left;
+}
+.ebtn:hover{background:rgba(255,255,255,.1);}
+.ebtn > svg{width:15px;height:15px;flex:0 0 auto;}
+.ebtn .label{flex:1 1 auto;}
+.ebtn .chev{width:9px;height:9px;flex:0 0 auto;}
+
+@media (max-width:640px){
+  .rsection-label{display:none;}
+}

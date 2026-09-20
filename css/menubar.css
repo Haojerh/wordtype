@@ -1,0 +1,57 @@
+.menubar{
+  flex:0 0 auto;height:36px;display:flex;align-items:center;padding:0 2px;
+  background:var(--bg);-webkit-user-select:none;user-select:none;
+}
+.mtab{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  height:100%;padding:0 14px;border-radius:2px;font-size:13px;color:var(--text);cursor:pointer;
+  white-space:nowrap;
+}
+.mtab:hover{background:rgba(255,255,255,.08);}
+.mtab.active span{font-weight:700;}
+.mtab.active::after{
+  content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+  width:40px;height:2px;border-radius:2px;background:var(--accent);
+}
+
+.mtab-more{
+  display:none;align-items:center;justify-content:center;
+  height:100%;width:34px;border-radius:2px;color:var(--text);cursor:pointer;flex:0 0 auto;
+}
+.mtab-more:hover{background:rgba(255,255,255,.08);}
+.mtab-more:hover .chev{color:var(--text-white);}
+.mtab-more .chev{width:14px;height:14px;color:var(--text-white);}
+
+.menubar-actions{display:flex;flex:1 0 0;justify-content:flex-end;align-items:center;gap:6px;padding-right:6px;min-width:0;}
+.mpill{
+  display:flex;align-items:center;gap:6px;height:24px;padding:0 8px;border-radius:4px;
+  background:var(--surface-pill);border:.8px solid var(--border);
+  color:var(--text);font-size:12px;cursor:pointer;white-space:nowrap;
+}
+.mpill:hover{background:#333333;}
+.mpill > svg{width:15px;height:15px;flex:0 0 auto;}
+.mpill .chev{width:10px;height:10px;}
+.mpill.share{background:var(--accent);border-color:var(--accent);color:var(--text-white);}
+.mpill.share span{font-weight:500;}
+.mpill.share:hover{background:var(--accent-hover);}
+.mpill-more{display:none;font-size:16px;line-height:1;letter-spacing:1px;}
+
+/* menubar tabs collapse one at a time as the window narrows, oldest/least-used first.
+   Breakpoints are spaced widely so the transition reads as gradual, not sudden. */
+@media (max-width:1080px){
+  .mtab-more{display:flex;}
+  .tab-help{display:none;}
+}
+@media (max-width:970px){ .tab-view{display:none;} }
+@media (max-width:860px){ .tab-review{display:none;} }
+@media (max-width:750px){ .tab-references{display:none;} }
+@media (max-width:640px){ .tab-layout{display:none;} }
+@media (max-width:530px){ .tab-insert{display:none;} }
+
+@media (max-width:900px){
+  .mpill span{display:none;}
+}
+@media (max-width:720px){
+  .mpill[data-icon="catchup"], .mpill[data-icon="edit"]{display:none;}
+  .mpill-more{display:flex;}
+}

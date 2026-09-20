@@ -1,0 +1,37 @@
+/* Design tokens — sourced from the Figma "Word dark theme" reference
+   (titlebar / menubar / ribbon). Every component pulls its colors from
+   here; nothing below should hardcode a hex value. */
+:root{
+  --bg:#111111;
+  --surface:#272727;
+  --surface-2:#252525;
+  --surface-hover:#333333;
+  --surface-pill:#2b2b2b;
+
+  --border-subtle:rgba(255,255,255,.10);
+  --border:rgba(255,255,255,.32);
+  --border-strong:rgba(255,255,255,.65);
+
+  --text:#d0d0d0;
+  --text-dim:#9d9d9d;
+  --text-faint:#888888;
+  --text-muted:#aaaaaa;
+  --text-white:#ffffff;
+
+  --accent:#0f6cbd;
+  --accent-hover:#1177c9;
+
+  --success:#5bc06b;
+  --error:#ff5c4d;
+  --highlight-swatch:#ffd700;
+  --textcolor-swatch:#e74c3c;
+  --heading-color:#99b0c7;
+  --paste-color:#c8944a;
+  --changecase-color:#b388ff;
+  --cloudsync-color:#4db6f5;
+  --addins-color:#d83b01;
+
+  --paper-text:#e6e6e6;
+
+  color-scheme:dark;
+}
