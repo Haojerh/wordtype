@@ -22,7 +22,7 @@
   animation:blink 1s steps(1) infinite;
 }
 @keyframes blink{50%{opacity:0;}}
-#capture{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;left:-9999px;}
+#capture{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;top:0;left:0;}
 
 .word-counter{
   position:absolute;top:21px;left:23px;

@@ -172,64 +172,95 @@ WT.TypingTest = (function(){
     updateCaret();
   }
 
+  function processBackspace(){
+    if(finished) return;
+    if(curOverflow > 0){
+      curOverflow--;
+      totalIncorrect--;
+      if(curWordIdx === words.length - 1 && lastWordComplete()){ finishTest(); return; }
+      return;
+    }
+    if(curCharIdx > 0){
+      curCharIdx--;
+      var prevEl = wordEls[curWordIdx][curCharIdx];
+      if(prevEl.classList.contains('incorrect')) totalIncorrect--;
+      else if(prevEl.classList.contains('correct')) totalCorrect--;
+      setLetterState(curWordIdx, curCharIdx, 'pending');
+      updateCaret();
+      return;
+    }
+    if(curWordIdx > 0 && wordHasIssue(curWordIdx - 1)){
+      totalCorrect--;
+      curWordIdx--;
+      curCharIdx = wordTypedLen[curWordIdx];
+      updateCaret();
+    }
+  }
+
+  function processSpace(){
+    if(finished) return;
+    if(curCharIdx === 0) return;
+    if(curWordIdx === words.length - 1){
+      if(lastWordComplete()) finishTest();
+      return;
+    }
+    totalCorrect++;
+    commitWordAdvance();
+  }
+
+  function processChar(ch){
+    if(finished) return;
+    if(!startTime) startTimer();
+    var word = words[curWordIdx];
+    if(curCharIdx < word.length){
+      var correct = ch === word[curCharIdx];
+      setLetterState(curWordIdx, curCharIdx, correct ? 'correct' : 'incorrect');
+      if(correct){ totalCorrect++; } else { totalIncorrect++; totalMistakes++; }
+      curCharIdx++;
+    } else {
+      totalIncorrect++;
+      totalMistakes++;
+      curOverflow++;
+    }
+    if(curWordIdx === words.length - 1 && lastWordComplete()){
+      finishTest();
+      return;
+    }
+    updateCaret();
+  }
+
   function handleKeydown(e){
     if(finished) return;
     if(e.key === 'Backspace'){
       e.preventDefault();
-      if(curOverflow > 0){
-        curOverflow--;
-        totalIncorrect--;
-        if(curWordIdx === words.length - 1 && lastWordComplete()){ finishTest(); return; }
-        return;
-      }
-      if(curCharIdx > 0){
-        curCharIdx--;
-        var prevEl = wordEls[curWordIdx][curCharIdx];
-        if(prevEl.classList.contains('incorrect')) totalIncorrect--;
-        else if(prevEl.classList.contains('correct')) totalCorrect--;
-        setLetterState(curWordIdx, curCharIdx, 'pending');
-        updateCaret();
-        return;
-      }
-      if(curWordIdx > 0 && wordHasIssue(curWordIdx - 1)){
-        totalCorrect--;
-        curWordIdx--;
-        curCharIdx = wordTypedLen[curWordIdx];
-        updateCaret();
-      }
+      processBackspace();
       return;
     }
     if(e.key === ' '){
       e.preventDefault();
-      if(curCharIdx === 0) return;
-      if(curWordIdx === words.length - 1){
-        if(lastWordComplete()) finishTest();
-        return;
-      }
-      totalCorrect++;
-      commitWordAdvance();
+      processSpace();
       return;
     }
-    if(e.key.length === 1){
+    if(typeof e.key === 'string' && e.key.length === 1){
       e.preventDefault();
-      if(!startTime) startTimer();
-      var word = words[curWordIdx];
-      if(curCharIdx < word.length){
-        var correct = e.key === word[curCharIdx];
-        setLetterState(curWordIdx, curCharIdx, correct ? 'correct' : 'incorrect');
-        if(correct){ totalCorrect++; } else { totalIncorrect++; totalMistakes++; }
-        curCharIdx++;
-      } else {
-        totalIncorrect++;
-        totalMistakes++;
-        curOverflow++;
-      }
-      if(curWordIdx === words.length - 1 && lastWordComplete()){
-        finishTest();
-        return;
-      }
-      updateCaret();
+      processChar(e.key);
     }
+    // Anything else (notably Android's on-screen keyboards, which report keydown
+    // with key:"Unidentified"/keyCode 229 for ordinary typing) is left unhandled
+    // here — handleInput below picks up the actual character from the real DOM
+    // edit once the browser applies it, since we never called preventDefault.
+  }
+
+  function handleInput(e){
+    if(finished || e.isComposing) return;
+    if(e.inputType === 'deleteContentBackward' || e.inputType === 'deleteContentForward'){
+      processBackspace();
+    } else if(e.data){
+      for(var i=0; i<e.data.length; i++){
+        e.data[i] === ' ' ? processSpace() : processChar(e.data[i]);
+      }
+    }
+    captureEl.value = '';
   }
 
   function focusCapture(){
@@ -253,6 +284,7 @@ WT.TypingTest = (function(){
     };
 
     captureEl.addEventListener('keydown', handleKeydown);
+    captureEl.addEventListener('input', handleInput);
     pageEl.addEventListener('click', focusCapture);
     captureEl.addEventListener('blur', function(){ pageEl.classList.remove('focused'); });
     document.getElementById(ids.retryBtn).addEventListener('click', function(e){ e.stopPropagation(); restart(); focusCapture(); });
