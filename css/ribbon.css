@@ -140,6 +140,3 @@
 .ebtn .label{flex:1 1 auto;}
 .ebtn .chev{width:9px;height:9px;flex:0 0 auto;}
 
-@media (max-width:640px){
-  .rsection-label{display:none;}
-}
